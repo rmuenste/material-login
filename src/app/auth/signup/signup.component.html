@@ -1,4 +1,5 @@
 <section class="signup-form">
+  <!-- #f is a local reference to the form for the html template -->
 <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" action="" #f="ngForm" (ngSubmit)="onSubmit(f)">
   <mat-form-field>
     <input type="email"
@@ -19,11 +20,11 @@
            ngModel
            name="password"
            required
-           minlength="6"
+           minlength="8"
            #pwInput="ngModel"
            >
-    <mat-hint>Should be at least 6 characters long</mat-hint>
-    <mat-error>Should be at least 6 characters long</mat-error>
+    <mat-hint>Should be at least 8 characters long</mat-hint>
+    <mat-error>Should be at least 8 characters long</mat-error>
   </mat-form-field>
   <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Submit</button>
 </form>

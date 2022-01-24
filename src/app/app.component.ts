@@ -7,9 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'auth-project';
-  openSidenav=false;
 
-  onToggle(): void {
-    this.openSidenav = !this.openSidenav;
-  }
 }
