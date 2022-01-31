@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
 const signupUrl = "http://localhost:5001/api/auth/signup/";
+const loginUrl = "http://localhost:5001/api/auth/login/";
 
 @Injectable({
   providedIn: 'root'
@@ -34,14 +35,16 @@ export class AuthService {
     this.router.navigate(['/profile']);
   }
 
-  login(authData: AuthData): void {
+  login(authData: AuthData): Observable<any> {
     this.user = {
       email: authData.email,
       password: authData.password
     };
 
-    this.authChange.next(true);
-    this.router.navigate(['/profile']);
+//    this.authChange.next(true);
+//    this.router.navigate(['/profile']);
+    let userData = {...this.user};
+    return this.http.post(loginUrl, userData);
   }
 
   logout(): void {

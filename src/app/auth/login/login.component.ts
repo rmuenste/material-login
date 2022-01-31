@@ -24,6 +24,16 @@ export class LoginComponent implements OnInit {
     this.authService.login( {
       email: this.loginForm.value.email,
       password: this.loginForm.value.password
+    }).subscribe({
+      next: (res) => {
+        this.authService.authSuccessful();
+        let resObj = {...res};
+        console.log( `User id = ${resObj.user}`);
+      },
+      error: (e) => console.log(e),
+      complete: () => {
+        console.log("Login complete");
+      }
     });
   }
 
