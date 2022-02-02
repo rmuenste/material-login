@@ -8,6 +8,11 @@ import { Router } from '@angular/router';
 
 const signupUrl = "http://localhost:5001/api/auth/signup/";
 const loginUrl = "http://localhost:5001/api/auth/login/";
+const logoutUrl = "http://localhost:5001/api/auth/logout/";
+
+const httpOptions = {
+ withCredentials: true
+};
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +32,7 @@ export class AuthService {
     };
 
     let userData = {...this.user};
-    return this.http.post(signupUrl, userData);
+    return this.http.post(signupUrl, userData, httpOptions);
   }
 
   authSuccessful() {
@@ -44,13 +49,14 @@ export class AuthService {
 //    this.authChange.next(true);
 //    this.router.navigate(['/profile']);
     let userData = {...this.user};
-    return this.http.post(loginUrl, userData);
+    return this.http.post(loginUrl, userData, httpOptions);
   }
 
-  logout(): void {
+  logout(): Observable<any> {
     this.user = null;
     this.authChange.next(false);
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
+    return this.http.get(logoutUrl, httpOptions);
   }
 
   getUser(): User {
